@@ -3,810 +3,726 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surendra Yadav | Business Operations & Data Analyst</title>
+    <title>Surendra Yadav | Portfolio</title>
     
-    <!-- Icons & Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Framer Motion -->
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 1. CONFIGURATION & VARIABLES --- */
         :root {
-            /* Light Theme */
-            --bg-body: #F0F4F8;
-            --bg-glass: rgba(255, 255, 255, 0.7);
-            --bg-card: #FFFFFF;
-            
-            --primary: #2563EB;       /* Royal Blue */
-            --primary-dark: #1D4ED8;
-            --secondary: #0F172A;     /* Dark Slate */
-            --accent: #10B981;        /* Emerald */
-            
-            --text-main: #0F172A;
-            --text-muted: #64748B;
-            
-            --gradient-main: linear-gradient(135deg, #2563EB 0%, #10B981 100%);
-            --shadow-card: 0 10px 40px -10px rgba(0,0,0,0.1);
-            --shadow-hover: 0 20px 40px -10px rgba(37, 99, 235, 0.2);
-            
-            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --navy-dark: #111827;
+            --navy-light: #1e293b;
+            --gold-accent: #EAB308;
         }
-
-        [data-theme="dark"] {
-            /* Dark Theme */
-            --bg-body: #020617;
-            --bg-glass: rgba(15, 23, 42, 0.8);
-            --bg-card: #1E293B;
-            
-            --primary: #60A5FA;
-            --primary-dark: #3B82F6;
-            --secondary: #F8FAFC;
-            --accent: #34D399;
-            
-            --text-main: #F1F5F9;
-            --text-muted: #94A3B8;
-            
-            --gradient-main: linear-gradient(135deg, #60A5FA 0%, #34D399 100%);
-            --shadow-card: 0 10px 40px -10px rgba(0,0,0,0.5);
-            --shadow-hover: 0 20px 40px -10px rgba(56, 189, 248, 0.2);
-        }
-
-        /* --- 2. GLOBAL STYLES --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
+            background-color: #F8FAFC;
+            color: #333;
             overflow-x: hidden;
-            transition: var(--transition);
+            scroll-behavior: smooth;
         }
-
-        /* Animated Background Mesh */
-        .bg-mesh {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: 
-                radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.1) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.1) 0px, transparent 50%);
+        h1, h2, h3, h4, .serif-font {
+            font-family: 'Playfair Display', serif;
         }
-
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; color: var(--text-main); line-height: 1.2; }
-        a { text-decoration: none; color: inherit; transition: var(--transition); }
-        ul { list-style: none; }
-        img { max-width: 100%; display: block; border-radius: 16px; }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        .section-padding { padding: 100px 0; }
-        .text-gradient { background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
-        /* --- 3. COMPONENTS --- */
-        /* Glass Card */
-        .glass-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 24px;
-            box-shadow: var(--shadow-card);
-            transition: var(--transition);
-        }
-        .glass-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); border-color: var(--primary); }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 14px 32px; border-radius: 50px; font-weight: 600;
-            cursor: pointer; transition: 0.3s; position: relative; overflow: hidden;
-            font-size: 1rem; z-index: 1;
-        }
-        .btn-primary { background: var(--gradient-main); color: white; box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3); border: none; }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4); }
         
-        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--text-main); }
-        .btn-outline:hover { background: rgba(37, 99, 235, 0.1); color: var(--primary); }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
 
-        /* --- 4. NAVBAR --- */
-        .navbar {
-            position: fixed; top: 0; left: 0; width: 100%; height: 80px; z-index: 1000;
-            display: flex; align-items: center; transition: 0.3s;
+        /* Glow Effect Classes */
+        .glow-hover:hover {
+            filter: drop-shadow(0 0 8px rgba(234, 179, 8, 0.6));
+            transform: translateY(-2px);
         }
-        .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            height: 70px;
-        }
-        [data-theme="dark"] .navbar.scrolled { background: rgba(15, 23, 42, 0.8); border-bottom: 1px solid rgba(255,255,255,0.05); }
-
-        .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .logo { font-size: 1.8rem; font-weight: 800; }
-        .logo span { color: var(--primary); }
-
-        .nav-links { display: flex; gap: 30px; }
-        .nav-link { font-weight: 500; font-size: 0.95rem; color: var(--text-muted); position: relative; cursor: pointer; }
-        .nav-link.active, .nav-link:hover { color: var(--primary); }
-        .nav-link::after {
-            content: ''; position: absolute; bottom: -4px; left: 0; width: 0%; height: 2px;
-            background: var(--gradient-main); transition: 0.3s;
-        }
-        .nav-link.active::after, .nav-link:hover::after { width: 100%; }
-
-        .nav-actions { display: flex; align-items: center; gap: 15px; }
-        .theme-toggle { cursor: pointer; font-size: 1.2rem; color: var(--text-main); transition: 0.3s; }
-        .theme-toggle:hover { color: var(--primary); transform: rotate(180deg); }
-        .hamburger { display: none; font-size: 1.5rem; cursor: pointer; color: var(--text-main); }
-
-        /* --- 5. HERO SECTION --- */
-        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
-        .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center; }
         
-        .hero-tag { display: inline-block; padding: 6px 16px; background: rgba(37,99,235,0.1); color: var(--primary); border-radius: 30px; font-weight: 600; margin-bottom: 20px; font-size: 0.9rem; }
-        .hero-title { font-size: 4rem; font-weight: 800; margin-bottom: 20px; }
-        .hero-desc { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 40px; max-width: 600px; }
-
-        /* Typing Effect */
-        .typing-box { font-size: 1.4rem; font-weight: 600; color: var(--text-main); margin-bottom: 20px; }
-        .typing-text { color: var(--accent); }
-        .cursor { display: inline-block; width: 3px; height: 24px; background: var(--text-main); animation: blink 0.8s infinite; vertical-align: middle; }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* 3D Profile Card */
-        .hero-card-3d {
-            position: relative; perspective: 1000px;
+        /* Blinking Cursor for Typewriter */
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            background-color: #EAB308;
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+            height: 1.2em;
+            vertical-align: text-bottom;
         }
-        .hero-img-box {
-            width: 100%; max-width: 420px; aspect-ratio: 4/5;
-            background: #e2e8f0; border-radius: 30px; margin: 0 auto;
-            transform-style: preserve-3d; transition: transform 0.2s;
-            box-shadow: var(--shadow-card); position: relative;
-            overflow: hidden;
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
-        .hero-img { width: 100%; height: 100%; object-fit: cover; }
         
-        .float-badge {
-            position: absolute; bottom: 30px; right: -20px;
-            background: var(--bg-card); padding: 12px 24px; border-radius: 16px;
-            box-shadow: var(--shadow-hover); display: flex; align-items: center; gap: 12px;
-            animation: float 4s ease-in-out infinite; z-index: 2;
+        /* Ensure links are always clickable */
+        a {
+            position: relative;
+            z-index: 50; 
         }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-        /* --- 6. ABOUT / EXPERIENCE --- */
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-sub { color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; }
-        .section-title { font-size: 2.5rem; margin-top: 10px; }
-
-        .timeline-grid { display: grid; gap: 30px; max-width: 800px; margin: 0 auto; }
-        .timeline-item { display: flex; gap: 20px; }
-        .timeline-line { display: flex; flex-direction: column; align-items: center; }
-        .line-dot { width: 16px; height: 16px; background: var(--primary); border-radius: 50%; }
-        .line-bar { width: 2px; flex-grow: 1; background: rgba(37,99,235,0.2); margin-top: 5px; }
-        
-        .timeline-content { flex-grow: 1; padding-bottom: 30px; }
-        .timeline-date { color: var(--accent); font-weight: 600; font-size: 0.9rem; }
-        .timeline-role { font-size: 1.2rem; font-weight: 700; margin: 5px 0; }
-        .timeline-company { color: var(--text-muted); font-size: 1rem; margin-bottom: 10px; }
-
-        /* --- 7. EDUCATION CARDS --- */
-        .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px; }
-        .edu-card { padding: 30px; text-align: center; border-bottom: 4px solid var(--primary); }
-        .edu-year { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); }
-        .edu-degree { font-size: 1.25rem; font-weight: 700; margin: 10px 0; }
-
-        /* --- 8. CERTIFICATES --- */
-        .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
-        .cert-item { cursor: pointer; overflow: hidden; position: relative; }
-        .cert-img-wrapper { height: 220px; overflow: hidden; border-radius: 16px; position: relative; }
-        .cert-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .cert-item:hover img { transform: scale(1.1); }
-        .cert-info { padding: 15px 0; }
-
-        /* --- NEW: PROJECTS SECTION --- */
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .project-card {
-            cursor: pointer; overflow: hidden; display: flex; flex-direction: column;
-        }
-        .project-img-box {
-            height: 200px; overflow: hidden; border-radius: 16px; position: relative;
-        }
-        .project-img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .project-card:hover .project-img-box img { transform: scale(1.05); }
-        .project-overlay {
-            position: absolute; inset: 0; background: rgba(0,0,0,0.5); opacity: 0; transition: 0.3s;
-            display: flex; align-items: center; justify-content: center; color: white;
-        }
-        .project-card:hover .project-overlay { opacity: 1; }
-        .project-details { padding: 20px 0; }
-        .project-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
-        .project-desc-short { color: var(--text-muted); font-size: 0.95rem; }
-
-        /* --- 9. RESUME SECTION --- */
-        .resume-box { text-align: center; padding: 60px; background: rgba(37,99,235,0.05); border-radius: 30px; border: 1px dashed var(--primary); }
-        
-        /* --- 10. CONTACT --- */
-        .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; }
-        .contact-card { display: flex; align-items: center; gap: 20px; padding: 20px; margin-bottom: 20px; }
-        .contact-icon { width: 50px; height: 50px; background: var(--bg-body); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-        
-        .form-group { margin-bottom: 20px; }
-        .form-input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); background: var(--bg-body); color: var(--text-main); font-family: inherit; outline: none; transition: 0.3s; }
-        .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
-
-        /* --- FOOTER --- */
-        footer { padding: 40px 0; text-align: center; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 80px; }
-
-        /* --- UTILS --- */
-        .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .delay-100 { transition-delay: 0.1s; }
-        .delay-200 { transition-delay: 0.2s; }
-        .delay-300 { transition-delay: 0.3s; }
-
-        /* --- MODAL --- */
-        .modal { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; opacity: 0; transition: 0.3s; backdrop-filter: blur(5px); }
-        .modal.open { opacity: 1; }
-        .modal-content { max-width: 90%; max-height: 90%; border-radius: 16px; transform: scale(0.8); transition: 0.3s; }
-        .modal.open .modal-content { transform: scale(1); }
-        .close-modal { position: absolute; top: 30px; right: 30px; color: white; font-size: 2rem; cursor: pointer; }
-
-        /* Project Modal Specific */
-        .project-modal-box {
-            background: var(--bg-card); padding: 40px; max-width: 600px; width: 90%; 
-            border-radius: 24px; position: relative; text-align: left;
-        }
-        .project-modal-img { width: 100%; height: 250px; object-fit: cover; border-radius: 16px; margin-bottom: 20px; }
-        .close-project-modal { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: var(--text-main); }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .hero-grid, .contact-grid { grid-template-columns: 1fr; text-align: center; }
-            .hero-img-box { margin: 0 auto; order: -1; max-width: 300px; }
-            .hero-title { font-size: 3rem; }
-            .nav-links { display: none; position: absolute; top: 80px; left: 0; width: 100%; background: var(--bg-card); flex-direction: column; padding: 30px; }
-            .nav-links.active { display: flex; animation: fadeIn 0.3s; }
-            .hamburger { display: block; }
-            .timeline-item { flex-direction: column; text-align: left; }
-            .timeline-line { display: none; }
-        }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-<body data-theme="light">
+<body>
 
-    <div class="bg-mesh"></div>
+    <div id="root"></div>
 
-    <!-- NAVBAR -->
-    <nav class="navbar" id="navbar">
-        <div class="container nav-container">
-            <a href="#" class="logo">Surendra<span>.</span></a>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#certificates" class="nav-link">Certificates</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="theme-toggle" id="theme-toggle"><i class="fas fa-moon"></i></div>
-                <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
-            </div>
-        </div>
-    </nav>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        
+        // --- SAFE ANIMATION LOADER ---
+        const MotionLib = window.Motion;
+        const motion = MotionLib ? MotionLib.motion : { 
+            div: ({children, className, ...props}) => <div className={className} {...props}>{children}</div>,
+            a: ({children, className, ...props}) => <a className={className} {...props}>{children}</a>,
+            button: ({children, className, ...props}) => <button className={className} {...props}>{children}</button>,
+            span: ({children, className, ...props}) => <span className={className} {...props}>{children}</span>,
+            li: ({children, className, ...props}) => <li className={className} {...props}>{children}</li>
+        };
+        const AnimatePresence = MotionLib ? MotionLib.AnimatePresence : ({children}) => <>{children}</>;
 
-    <!-- HERO SECTION -->
-    <section id="home" class="hero">
-        <div class="container hero-grid">
-            <div class="hero-text reveal">
-                <span class="hero-tag">Welcome to my Portfolio</span>
-                <h1 class="hero-title">I am Surendra, <br> <span class="text-gradient">Data & Finance Pro</span></h1>
-                
-                <div class="typing-box">
-                    I specialize in <span class="typing-text" id="typewriter"></span><span class="cursor"></span>
-                </div>
+        // --- Brand Icons ---
+        const BrandIcons = {
+            Excel: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 text-green-600"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h8"/><path d="M10 9h4"/></svg>,
+            Python: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 text-blue-500"><path d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10z"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>,
+            PowerBI: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 text-yellow-600"><rect x="3" y="14" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="14" rx="1"/><rect x="15" y="4" width="6" height="18" rx="1"/></svg>,
+            MySQL: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 text-blue-700"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>,
+            Tally: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 text-teal-600"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="12" y1="4" x2="12" y2="20"/><line x1="2" y1="10" x2="22" y2="10"/></svg>,
+            MSOffice: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 text-orange-600"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        };
 
-                <p class="hero-desc">
-                    Bridging the gap between <strong>Accounting, Supply Chain, and Analytics</strong>. I help businesses streamline operations and make smarter decisions using Python, SQL, and Power BI.
-                </p>
+        // --- UI Icons ---
+        const Icons = {
+            Linkedin: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>,
+            Phone: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>,
+            Mail: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>,
+            MapPin: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>,
+            User: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+            Award: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>,
+            Target: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
+            TrendingUp: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>,
+            Users: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+            Monitor: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>,
+            FileText: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,
+            Box: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>,
+            GraduationCap: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>,
+            Calendar: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>,
+            Menu: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>,
+            X: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>,
+            Send: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>,
+            Heart: ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none" className={className}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        };
 
-                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px;">
-                    <a href="#contact" class="btn btn-primary">Let's Connect <i class="fas fa-arrow-right"></i></a>
-                    <a href="#resume" class="btn btn-outline">My Resume <i class="fas fa-download"></i></a>
-                </div>
-            </div>
+        const Navbar = () => {
+            const [isOpen, setIsOpen] = useState(false);
+            const [scrolled, setScrolled] = useState(false);
 
-            <div class="hero-card-3d reveal delay-200">
-                <div class="hero-img-box" id="tilt-card">
-                    <!-- Replace with your photo -->
-                    <img src="Profile.jpg" alt="Surendra Yadav" class="hero-img">
-                    <div class="float-badge">
-                        <i class="fas fa-chart-line" style="color: var(--accent); font-size: 1.5rem;"></i>
-                        <div>
-                            <span style="display: block; font-weight: 700; font-size: 0.9rem;">Data Driven</span>
-                            <span style="font-size: 0.8rem; color: var(--text-muted);">Solutions</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 20);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
 
-    <!-- ABOUT & EDUCATION -->
-    <section id="about" class="section-padding">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-sub">My Journey</span>
-                <h2 class="section-title">Experience & Education</h2>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start;">
-                <!-- Experience Timeline -->
-                <div class="timeline-grid reveal delay-100">
-                    <h3 style="margin-bottom: 30px;">Professional Experience</h3>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-line"><div class="line-dot"></div><div class="line-bar"></div></div>
-                        <div class="timeline-content">
-                            <span class="timeline-date">Dec 2023 - Oct 2024</span>
-                            <h4 class="timeline-role">Relationship Manager</h4>
-                            <div class="timeline-company">Prayas Financial Services Pvt Ltd</div>
-                            <p style="color:var(--text-muted); font-size:0.9rem;">Customer acquisition, loan disbursement, and data record keeping.</p>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-line"><div class="line-dot"></div><div class="line-bar"></div></div>
-                        <div class="timeline-content">
-                            <span class="timeline-date">Jan 2022 - Dec 2023</span>
-                            <h4 class="timeline-role">Kendra Manager</h4>
-                            <div class="timeline-company">CreditAccess Grameen Ltd</div>
-                            <p style="color:var(--text-muted); font-size:0.9rem;">Loan processing, bank deposits, and maintaining customer records.</p>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-line"><div class="line-dot"></div></div>
-                        <div class="timeline-content">
-                            <span class="timeline-date">2021 - 2022</span>
-                            <h4 class="timeline-role">Insurance Assistant</h4>
-                            <div class="timeline-company">Alive Gic Nautanwa</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Education -->
-                <div class="reveal delay-200">
-                    <h3 style="margin-bottom: 30px;">Education</h3>
-                    <div class="glass-card edu-card" style="margin-bottom: 20px;">
-                        <span class="edu-year">2020 - 2023</span>
-                        <h3 class="edu-degree">Bachelor of Arts</h3>
-                        <p style="color:var(--text-muted);">Siddharth University, Siddharth Nagar</p>
-                    </div>
-                    <div class="glass-card edu-card" style="margin-bottom: 20px;">
-                        <span class="edu-year">2019 - 2020</span>
-                        <h3 class="edu-degree">Intermediate (12th)</h3>
-                        <p style="color:var(--text-muted);">Science & Mathematics</p>
-                    </div>
-                    <div class="glass-card edu-card">
-                        <span class="edu-year">2017 - 2018</span>
-                        <h3 class="edu-degree">High School (10th)</h3>
-                        <p style="color:var(--text-muted);">Science & Mathematics</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SKILLS SECTION -->
-    <section id="skills" class="section-padding" style="background: rgba(37,99,235,0.03);">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-sub">My Arsenal</span>
-                <h2 class="section-title">Technical Skills</h2>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;" class="reveal delay-100">
-                <div class="glass-card" style="padding: 30px; text-align: center;">
-                    <i class="fab fa-python" style="font-size: 3rem; color: #3776AB; margin-bottom: 15px;"></i>
-                    <h4>Python</h4>
-                </div>
-                <div class="glass-card" style="padding: 30px; text-align: center;">
-                    <i class="fas fa-database" style="font-size: 3rem; color: #10B981; margin-bottom: 15px;"></i>
-                    <h4>SQL</h4>
-                </div>
-                <div class="glass-card" style="padding: 30px; text-align: center;">
-                    <i class="fas fa-chart-pie" style="font-size: 3rem; color: #F2C811; margin-bottom: 15px;"></i>
-                    <h4>Power BI</h4>
-                </div>
-                <div class="glass-card" style="padding: 30px; text-align: center;">
-                    <i class="fas fa-file-excel" style="font-size: 3rem; color: #1D6F42; margin-bottom: 15px;"></i>
-                    <h4>Adv. Excel</h4>
-                </div>
-                <div class="glass-card" style="padding: 30px; text-align: center;">
-                    <i class="fas fa-file-invoice" style="font-size: 3rem; color: #6366F1; margin-bottom: 15px;"></i>
-                    <h4>Tally Prime</h4>
-                </div>
-                <div class="glass-card" style="padding: 30px; text-align: center;">
-                    <i class="fas fa-truck-loading" style="font-size: 3rem; color: var(--secondary); margin-bottom: 15px;"></i>
-                    <h4>SCM</h4>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NEW: PROJECTS SECTION -->
-    <section id="projects" class="section-padding">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-sub">My Work</span>
-                <h2 class="section-title">Featured Projects</h2>
-            </div>
-
-            <div class="projects-grid reveal delay-100">
-                <!-- Project 1 -->
-                <div class="glass-card project-card" 
-                     data-title="Data Analysis Dashboard" 
-                     data-desc="This is a dummy content for the Data Analysis Dashboard project. I will update this section with detailed information about the tools used, the problem statement, and the solution provided later. It involves data visualization and insights generation."
-                     data-img="https://via.placeholder.com/600x400/2563EB/FFFFFF?text=Data+Analysis">
-                    <div class="project-img-box">
-                        <img src="https://via.placeholder.com/600x400/2563EB/FFFFFF?text=Data+Analysis" alt="Project 1">
-                        <div class="project-overlay"><i class="fas fa-eye fa-2x"></i></div>
-                    </div>
-                    <div class="project-details" style="padding: 20px;">
-                        <h3 class="project-title">Data Analysis Dashboard</h3>
-                        <p class="project-desc-short">Visualizing key business metrics using Power BI.</p>
-                        <span style="color: var(--primary); font-size: 0.9rem; font-weight: 600; margin-top: 10px; display: block;">View Details <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="glass-card project-card" 
-                     data-title="Inventory Management System" 
-                     data-desc="This is a dummy content for the Inventory Management System project. This project focuses on optimizing stock levels and reducing wastage using Python and SQL. I will update the full case study here."
-                     data-img="https://via.placeholder.com/600x400/10B981/FFFFFF?text=Inventory+System">
-                    <div class="project-img-box">
-                        <img src="https://via.placeholder.com/600x400/10B981/FFFFFF?text=Inventory+System" alt="Project 2">
-                        <div class="project-overlay"><i class="fas fa-eye fa-2x"></i></div>
-                    </div>
-                    <div class="project-details" style="padding: 20px;">
-                        <h3 class="project-title">Inventory Management</h3>
-                        <p class="project-desc-short">Optimizing stock flow with Python automation.</p>
-                        <span style="color: var(--primary); font-size: 0.9rem; font-weight: 600; margin-top: 10px; display: block;">View Details <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="glass-card project-card" 
-                     data-title="Financial Reporting Tool" 
-                     data-desc="This is a dummy content for the Financial Reporting Tool project. It automates monthly financial reports using Excel Macros and VBA. I will add the actual workflow and results achieved shortly."
-                     data-img="https://via.placeholder.com/600x400/0F172A/FFFFFF?text=Financial+Report">
-                    <div class="project-img-box">
-                        <img src="https://via.placeholder.com/600x400/0F172A/FFFFFF?text=Financial+Report" alt="Project 3">
-                        <div class="project-overlay"><i class="fas fa-eye fa-2x"></i></div>
-                    </div>
-                    <div class="project-details" style="padding: 20px;">
-                        <h3 class="project-title">Financial Reporting</h3>
-                        <p class="project-desc-short">Automating reports with Advanced Excel.</p>
-                        <span style="color: var(--primary); font-size: 0.9rem; font-weight: 600; margin-top: 10px; display: block;">View Details <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CERTIFICATES -->
-    <section id="certificates" class="section-padding" style="background: rgba(37,99,235,0.03);">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-sub">Credentials</span>
-                <h2 class="section-title">Certifications</h2>
-            </div>
-
-            <div class="cert-grid reveal delay-100">
-                <!-- Cert 1 -->
-                <div class="glass-card cert-item" onclick="openModal(this)">
-                    <div class="cert-img-wrapper">
-                        <img src="Ccc.jpg" alt="CCC">
-                    </div>
-                    <div class="cert-info" style="padding: 20px;">
-                        <h4>CCC Certification</h4>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">NIELIT (Govt. of India)</p>
-                    </div>
-                </div>
-
-                <!-- Cert 2 -->
-                <div class="glass-card cert-item" onclick="openModal(this)">
-                    <div class="cert-img-wrapper">
-                        <img src="Supply.jpg" alt="Warehouse">
-                    </div>
-                    <div class="cert-info" style="padding: 20px;">
-                        <h4>Warehouse Management</h4>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Logistics & SCM</p>
-                    </div>
-                </div>
-
-                <!-- Cert 3 -->
-                <div class="glass-card cert-item" onclick="openModal(this)">
-                    <div class="cert-img-wrapper">
-                        <img src="Tally.jpg" alt="Tally">
-                    </div>
-                    <div class="cert-info" style="padding: 20px;">
-                        <h4>Tally Prime</h4>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Accounting & Finance</p>
-                    </div>
-                </div>
-
-                <!-- Cert 4 (New) -->
-                <div class="glass-card cert-item" onclick="openModal(this)">
-                    <div class="cert-img-wrapper">
-                        <img src="https://via.placeholder.com/600x400/F59E0B/FFFFFF?text=Excel+%26+Data" alt="Excel Data">
-                    </div>
-                    <div class="cert-info" style="padding: 20px;">
-                        <h4>Data Analytics Using Excel,Python,PBI</h4>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Advanced Data Skills</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- RESUME DOWNLOAD -->
-    <section id="resume" class="section-padding">
-        <div class="container reveal">
-            <div class="resume-box">
-                <h2 style="margin-bottom: 20px;">My Professional Resume</h2>
-                <p style="max-width: 600px; margin: 0 auto 30px; color: var(--text-muted);">
-                    Download my detailed resume to understand my skills, experience, and academic background in depth.
-                </p>
-                <!-- NOTE: Replace 'assets/resume.pdf' with your actual file path -->
-                <a href="surendra_yadav_resume_updated.pdf" download class="btn btn-primary">
-                    <i class="fas fa-download"></i> Download Resume PDF
+            const NavLink = ({ href, children }) => (
+                <a 
+                    href={href} 
+                    onClick={() => setIsOpen(false)}
+                    className="text-gray-300 hover:text-[#EAB308] font-medium text-sm transition-colors py-2 block md:inline-block glow-hover cursor-pointer"
+                >
+                    {children}
                 </a>
-            </div>
-        </div>
-    </section>
+            );
 
-    <!-- CONTACT -->
-    <section id="contact" class="section-padding">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-sub">Get in Touch</span>
-                <h2 class="section-title">Contact Me</h2>
-            </div>
+            return (
+                <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#111827]/95 shadow-lg py-3' : 'bg-transparent py-5'}`}>
+                    <div className="container mx-auto px-6 flex justify-between items-center">
+                        <div className="text-xl font-bold text-white serif-font tracking-wide">
+                            Surendra<span className="text-yellow-500">.</span>
+                        </div>
+                        
+                        {/* Desktop Menu */}
+                        <div className="hidden md:flex space-x-8">
+                            <NavLink href="#about">About</NavLink>
+                            <NavLink href="#experience">Experience</NavLink>
+                            <NavLink href="#skills">Skills</NavLink>
+                            <NavLink href="#education">Education</NavLink>
+                            <NavLink href="#contact">Contact</NavLink>
+                        </div>
 
-            <div class="contact-grid reveal delay-100">
-                <div class="contact-info">
-                    <div class="glass-card contact-card">
-                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                        <div>
-                            <h4>Phone</h4>
-                            <p style="color:var(--text-muted);">+91 8577074763</p>
+                        {/* Mobile Toggle */}
+                        <button 
+                            className="md:hidden text-white p-2 glow-active relative z-50"
+                            onClick={() => setIsOpen(!isOpen)}
+                        >
+                            {isOpen ? <Icons.X className="w-6 h-6" /> : <Icons.Menu className="w-6 h-6" />}
+                        </button>
+                    </div>
+
+                    {/* Mobile Menu */}
+                    {isOpen && (
+                        <div className="md:hidden bg-[#111827] border-t border-gray-800 absolute w-full left-0 px-6 py-4 flex flex-col space-y-2 shadow-2xl z-40">
+                            <NavLink href="#about">About</NavLink>
+                            <NavLink href="#experience">Experience</NavLink>
+                            <NavLink href="#skills">Skills</NavLink>
+                            <NavLink href="#education">Education</NavLink>
+                            <NavLink href="#contact">Contact</NavLink>
+                        </div>
+                    )}
+                </nav>
+            );
+        };
+
+        const Typewriter = () => {
+            const [text, setText] = useState('');
+            const [isDeleting, setIsDeleting] = useState(false);
+            const [loopNum, setLoopNum] = useState(0);
+            const [typingSpeed, setTypingSpeed] = useState(150);
+
+            const phrases = [
+                "Finance & MIS Professional",
+                "Accounting & Tally Prime",
+                "Supply Chain Specialist",
+                "Excel | SQL | Power BI",
+                "Data Analysis Expert"
+            ];
+
+            useEffect(() => {
+                const handleTyping = () => {
+                    const i = loopNum % phrases.length;
+                    const fullText = phrases[i];
+
+                    setText(isDeleting 
+                        ? fullText.substring(0, text.length - 1) 
+                        : fullText.substring(0, text.length + 1)
+                    );
+
+                    setTypingSpeed(isDeleting ? 50 : 100);
+
+                    if (!isDeleting && text === fullText) {
+                        setTimeout(() => setIsDeleting(true), 2000);
+                    } else if (isDeleting && text === '') {
+                        setIsDeleting(false);
+                        setLoopNum(loopNum + 1);
+                        setTypingSpeed(500);
+                    }
+                };
+
+                const timer = setTimeout(handleTyping, typingSpeed);
+                return () => clearTimeout(timer);
+            }, [text, isDeleting, loopNum, typingSpeed, phrases]);
+
+            return (
+                <div className="h-8 mb-6 flex justify-center items-center">
+                    <span className="text-lg text-gray-400 font-light text-center">
+                        {text}
+                    </span>
+                    <span className="typing-cursor"></span>
+                </div>
+            );
+        };
+
+        const Hero = () => (
+            <section className="relative bg-[#111827] text-white pt-32 pb-20 overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none z-0 bg-gradient-to-b from-transparent to-[#111827]"></div>
+                
+                <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
+                    
+                    {/* Interactive Profile Image Animation */}
+                    <motion.div 
+                        initial={{ scale: 0.5, opacity: 0 }} 
+                        animate={{ scale: 1, opacity: 1 }} 
+                        transition={{ duration: 0.5 }}
+                        whileHover={{ scale: 1.1, rotate: 2 }} 
+                        whileTap={{ scale: 0.95 }}
+                        className="relative mb-8 cursor-pointer group z-20"
+                    >
+                        <div className="w-40 h-40 rounded-full border-[4px] border-[#EAB308] p-1.5 shadow-[0_0_20px_rgba(234,179,8,0.3)] group-hover:shadow-[0_0_50px_rgba(234,179,8,0.8)] group-hover:border-white transition-all duration-300">
+                            <div className="w-full h-full rounded-full bg-gray-800 flex items-center justify-center overflow-hidden relative z-10">
+                                <motion.div
+                                    whileHover={{ scale: 1.2, rotate: -2 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <Icons.User className="text-gray-500 w-24 h-24" />
+                                </motion.div>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className="relative z-20"
+                    >
+                        <h3 className="text-[#EAB308] font-medium text-sm mb-2">Welcome to my portfolio</h3>
+                        <h1 className="text-4xl md:text-6xl font-bold serif-font mb-3">Surendra Yadav</h1>
+                        
+                        <Typewriter />
+
+                    </motion.div>
+
+                    <div className="flex flex-col md:flex-row gap-6 text-sm text-gray-400 mb-10 items-center relative z-50">
+                        <div className="flex items-center gap-2 glow-hover cursor-default">
+                            <Icons.MapPin className="w-4 h-4 text-yellow-500" /> Nautanwa, Uttar Pradesh, India
+                        </div>
+                        <div className="flex flex-wrap justify-center gap-6">
+                            
+                            {/* LinkedIn Link Fixed - Z-Index 50 */}
+                            <a 
+                                href="https://www.linkedin.com/in/surendra-yadav-a78916214" 
+                                target="_blank"
+                                className="flex items-center gap-2 hover:text-white transition-colors glow-hover cursor-pointer relative z-50 p-2"
+                            >
+                                <Icons.Linkedin className="w-4 h-4 text-yellow-500" /> LinkedIn Profile
+                            </a>
+                            
+                            <a href="mailto:sy223929@gmail.com" className="flex items-center gap-2 hover:text-white transition-colors glow-hover cursor-pointer relative z-50 p-2">
+                                <Icons.Mail className="w-4 h-4 text-yellow-500" /> sy223929@gmail.com
+                            </a>
                         </div>
                     </div>
-                    <div class="glass-card contact-card">
-                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                        <div>
-                            <h4>Email</h4>
-                            <p style="color:var(--text-muted);">sy223929@gmail.com</p>
+
+                    <div className="flex gap-4 relative z-50">
+                        <a href="#contact" className="bg-[#EAB308] text-[#111827] px-8 py-3 rounded font-bold text-sm hover:bg-yellow-400 transition-colors shadow-lg glow-hover cursor-pointer relative z-50">
+                            Get In Touch
+                        </a>
+                        <a href="#experience" className="bg-white/10 text-white px-8 py-3 rounded font-bold text-sm hover:bg-white/20 transition-colors backdrop-blur-sm border border-white/10 glow-hover cursor-pointer relative z-50">
+                            View Experience
+                        </a>
+                    </div>
+                </div>
+            </section>
+        );
+
+        const About = () => {
+            const stats = [
+                { icon: Icons.TrendingUp, title: "3+ Years", sub: "Professional Experience" },
+                { icon: Icons.Award, title: "Multiple Awards", sub: "Highest Loan Distribution" },
+                { icon: Icons.Target, title: "100% Accuracy", sub: "In Financial Documentation" },
+                { icon: Icons.Users, title: "Team Player", sub: "Cross-functional Coordination" }
+            ];
+
+            return (
+                <section id="about" className="py-20 bg-[#F8FAFC]">
+                    <div className="container mx-auto px-6">
+                        <div className="text-center mb-16">
+                            <span className="text-[#EAB308] font-bold text-sm uppercase tracking-wider block mb-2">About Me</span>
+                            <h2 className="text-3xl md:text-4xl font-bold serif-font text-[#111827]">Professional Summary</h2>
+                            <p className="max-w-3xl mx-auto mt-6 text-gray-600 leading-relaxed font-light">
+                                Results-driven office professional with 3+ years of experience in finance operations, office administration, MIS reporting, and customer data management. Skilled in Advanced Excel, Tally Prime, Python, Power BI, MySQL, MS Word and PowerPoint with working knowledge of supply chain operations, documentation flow, and record management. Proven track record of achieving performance targets with multiple Highest Loan Distribution Awards. Seeking office-based role in MIS, Back Office, Accounting, or Supply Chain Operations.
+                            </p>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {stats.map((stat, idx) => (
+                                <motion.div 
+                                    key={idx}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: idx * 0.1 }}
+                                    className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all glow-hover"
+                                >
+                                    <div className="bg-[#111827] p-3 rounded-lg text-white mb-4 w-fit">
+                                        <stat.icon className="w-6 h-6" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-[#111827] serif-font mb-1">{stat.title}</h3>
+                                    <p className="text-sm text-gray-500">{stat.sub}</p>
+                                </motion.div>
+                            ))}
                         </div>
                     </div>
-                    <!-- LinkedIn -->
-                    <div class="glass-card contact-card">
-                        <div class="contact-icon"><i class="fab fa-linkedin-in"></i></div>
-                        <div>
-                            <h4>LinkedIn</h4>
-                            <a href="https://www.linkedin.com/in/surendra-yadav-a78916214" target="_blank" style="color:var(--primary);">View Profile</a>
+                </section>
+            );
+        };
+
+        const Experience = () => {
+            const jobs = [
+                {
+                    role: "Branch Relationship Manager",
+                    company: "Prayas Financial Services Pvt. Ltd.",
+                    badge: "Zone Level Award",
+                    date: "December 2023 - January 2025",
+                    loc: "Gorakhpur, UP",
+                    points: [
+                        "Maintained comprehensive customer records, documentation, and daily MIS reports using Advanced Excel with pivot tables and VLOOKUP functions.",
+                        "Handled end-to-end office coordination including data entry, verification, and preparation of management reports.",
+                        "Supported billing operations, basic accounting entries in Tally Prime, and systematic record keeping for financial transactions.",
+                        "Developed data tracking systems and generated reports for management review to support decision-making processes.",
+                        "Managed loan disbursement operations and bank deposits with 100% accuracy in financial documentation.",
+                        "Achieved Highest Loan Distribution Award at Zone Level through efficient customer data management and operational excellence."
+                    ]
+                },
+                {
+                    role: "Relationship Manager",
+                    company: "Credit Access Grameen Limited",
+                    badge: "Two-time Area Award",
+                    date: "July 2022 - December 2023",
+                    loc: "Kaptanganj, UP",
+                    points: [
+                        "Managed branch-level records, customer databases, and generated daily and weekly MIS reports for operational monitoring.",
+                        "Handled complete documentation flow including verification, filing, and office administration activities.",
+                        "Maintained basic accounts records and created detailed reporting sheets for financial tracking and compliance.",
+                        "Achieved Highest Loan Distribution Award twice in the operational area by streamlining data management processes.",
+                        "Successfully processed loan collections and maintained systematic record of all banking transactions."
+                    ]
+                },
+                {
+                    role: "Insurance Assistant",
+                    company: "Alive GIC",
+                    badge: null,
+                    date: "2021 - 2022",
+                    loc: "Nautanwa, UP",
+                    points: [
+                        "Assisted in insurance policy processing, documentation, and customer service activities.",
+                        "Maintained policy records and prepared reports on sales performance and renewals.",
+                        "Handled customer queries and provided support for policy-related documentation and data entry."
+                    ]
+                }
+            ];
+
+            return (
+                <section id="experience" className="py-20 bg-white">
+                    <div className="container mx-auto px-6 max-w-4xl">
+                        <div className="text-center mb-16">
+                            <span className="text-[#EAB308] font-bold text-sm uppercase tracking-wider block mb-2">Career Journey</span>
+                            <h2 className="text-3xl md:text-4xl font-bold serif-font text-[#111827]">Professional Experience</h2>
+                        </div>
+
+                        <div className="space-y-8 md:pl-8 border-l-2 border-gray-100 ml-4 md:ml-0">
+                            {jobs.map((job, idx) => (
+                                <motion.div 
+                                    key={idx}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: idx * 0.2 }}
+                                    className="relative pl-8"
+                                >
+                                    <div className="absolute -left-[9px] top-6 w-4 h-4 rounded-full bg-[#111827] border-4 border-white shadow-sm"></div>
+                                    <div className="bg-[#F8FAFC] p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-all hover:border-yellow-200">
+                                        <h3 className="text-xl font-bold serif-font text-[#111827]">{job.role}</h3>
+                                        <div className="text-[#EAB308] font-medium text-sm mb-2">{job.company}</div>
+                                        {job.badge && (
+                                            <span className="inline-flex items-center gap-1 bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full font-bold mb-3">
+                                                <Icons.Award className="w-3 h-3" /> {job.badge}
+                                            </span>
+                                        )}
+                                        <div className="flex gap-4 text-xs text-gray-500 mb-4 uppercase tracking-wide">
+                                            <span>{job.date}</span> • <span>{job.loc}</span>
+                                        </div>
+                                        <ul className="space-y-2">
+                                            {job.points.map((p, i) => (
+                                                <li key={i} className="flex gap-2 text-sm text-gray-600 items-start">
+                                                    <span className="text-[#EAB308] mt-1.5 min-w-[6px]">•</span> <span>{p}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </motion.div>
+                            ))}
                         </div>
                     </div>
-                    <!-- Instagram (New) -->
-                    <div class="glass-card contact-card">
-                        <div class="contact-icon"><i class="fab fa-instagram"></i></div>
-                        <div>
-                            <h4>Instagram</h4>
-                            <a href="https://instagram.com/fintech.sy" target="_blank" style="color:var(--primary);">View Profile</a>
-                        </div>
+                </section>
+            );
+        };
+
+        const ProgressBar = ({ label, pct, Icon }) => (
+            <div className="mb-6 group cursor-default">
+                <div className="flex justify-between items-center mb-2">
+                    <div className="flex items-center gap-2 font-bold text-[#111827] text-sm">
+                        <Icon /> {label}
                     </div>
-                     <!-- GitHub (New) -->
-                     <div class="glass-card contact-card">
-                        <div class="contact-icon"><i class="fab fa-github"></i></div>
-                        <div>
-                            <h4>GitHub</h4>
-                            <a href="https://github.com/sy223929-dev" target="_blank" style="color:var(--primary);">View Code</a>
-                        </div>
+                    <span className="text-gray-400 text-sm group-hover:text-[#EAB308] transition-colors">{pct}%</span>
+                </div>
+                <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                    <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${pct}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className="h-full bg-[#1e293b] rounded-full group-hover:bg-[#EAB308] transition-colors duration-500 relative"
+                    >
+                        <div className="absolute right-0 top-0 bottom-0 w-1 bg-white/30"></div>
+                    </motion.div>
+                </div>
+            </div>
+        );
+
+        const Skills = () => (
+            <section id="skills" className="py-20 bg-[#F8FAFC]">
+                <div className="container mx-auto px-6">
+                    <div className="text-center mb-16">
+                        <span className="text-[#EAB308] font-bold text-sm uppercase tracking-wider block mb-2">Expertise</span>
+                        <h2 className="text-3xl md:text-4xl font-bold serif-font text-[#111827]">Technical Skills</h2>
                     </div>
-                    <div class="glass-card contact-card">
-                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div>
-                            <h4>Location</h4>
-                            <p style="color:var(--text-muted);">Nautanwa, Uttar Pradesh, India</p>
+
+                    <div className="grid md:grid-cols-3 gap-8 mb-16">
+                        {[
+                            { icon: Icons.Monitor, title: "Computer & Data Management", list: ["Advanced Excel (Pivot, VLOOKUP, Power Query)", "Tally Prime (Accounting, Billing, GST)", "Python (Data Handling, Basic Analysis)", "Power BI (Dashboards, Reports)", "MySQL (Basic Queries)", "MS Word, MS PowerPoint"] },
+                            { icon: Icons.FileText, title: "Office & Finance Operations", list: ["MIS Reporting", "Data Management", "Back Office Operations", "Billing & Record Keeping", "Documentation & File Management", "Office Coordination", "Payroll Data Support"] },
+                            { icon: Icons.Box, title: "Supply Chain Knowledge", list: ["Purchase and Sales Record Flow", "Stock Management & Inventory Control", "Warehouse Operations", "Operational Records Maintenance", "Cross-functional Coordination", "Excel-based Reporting Systems"] }
+                        ].map((card, idx) => (
+                            <motion.div 
+                                key={idx}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: idx * 0.1 }}
+                                className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1"
+                            >
+                                <div className="bg-[#1e293b] w-12 h-12 rounded-lg flex items-center justify-center text-white mb-6">
+                                    <card.icon className="w-6 h-6" />
+                                </div>
+                                <h3 className="text-lg font-bold serif-font mb-4">{card.title}</h3>
+                                <ul className="space-y-2">
+                                    {card.list.map((item, i) => (
+                                        <li key={i} className="text-sm text-gray-600 flex gap-2 items-start">
+                                            <span className="text-[#EAB308] mt-1">•</span> <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    <div className="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
+                        <h3 className="text-2xl font-bold serif-font text-center mb-10">Proficiency Levels</h3>
+                        <div className="grid gap-2">
+                            <ProgressBar label="Excel" pct={95} Icon={BrandIcons.Excel} />
+                            <ProgressBar label="Tally Prime" pct={90} Icon={BrandIcons.Tally} />
+                            <ProgressBar label="Power BI" pct={85} Icon={BrandIcons.PowerBI} />
+                            <ProgressBar label="Python" pct={70} Icon={BrandIcons.Python} />
+                            <ProgressBar label="MySQL" pct={65} Icon={BrandIcons.MySQL} />
+                            <ProgressBar label="MS Office" pct={95} Icon={BrandIcons.MSOffice} />
                         </div>
                     </div>
                 </div>
+            </section>
+        );
 
-                <div class="glass-card" style="padding: 40px; height: fit-content;">
-                    <form action="https://formspree.io/f/xgoovvyl" method="POST">
-                        <div class="form-group">
-                            <label style="display:block; margin-bottom:8px; font-weight:600;">Your Name</label>
-                            <input type="text" name="name" class="form-input" required>
+        const Contact = () => (
+            <section id="contact" className="bg-[#111827] text-white py-20">
+                <div className="container mx-auto px-6">
+                    <div className="text-center mb-16">
+                        <span className="text-[#EAB308] font-bold text-sm uppercase tracking-wider block mb-2">Get In Touch</span>
+                        <h2 className="text-3xl md:text-4xl font-bold serif-font">Contact Me</h2>
+                    </div>
+
+                    <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                        <div>
+                            <h3 className="text-2xl font-bold serif-font mb-4">Let's Connect</h3>
+                            <p className="text-gray-400 font-light mb-8">
+                                Open to opportunities in MIS, Back Office, Accounting, or Supply Chain Operations.
+                            </p>
+                            <div className="space-y-4 relative z-20">
+                                <a 
+                                    href="mailto:sy223929@gmail.com"
+                                    className="bg-[#1e293b] p-4 rounded-xl flex items-center gap-4 hover:bg-[#2d3b4e] transition-colors cursor-pointer block relative z-50"
+                                >
+                                    <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-[#111827]">
+                                        <Icons.Mail className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <div className="text-xs text-gray-400 uppercase">Email</div>
+                                        <div className="font-medium">sy223929@gmail.com</div>
+                                    </div>
+                                </a>
+
+                                {/* Explicitly Rendered LinkedIn Link in Contact Section */}
+                                <a 
+                                    href="https://www.linkedin.com/in/surendra-yadav-a78916214"
+                                    target="_blank"
+                                    className="bg-[#1e293b] p-4 rounded-xl flex items-center gap-4 hover:bg-[#2d3b4e] transition-colors cursor-pointer block relative z-50"
+                                >
+                                    <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-[#111827]">
+                                        <Icons.Linkedin className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <div className="text-xs text-gray-400 uppercase">LinkedIn</div>
+                                        <div className="font-medium">LinkedIn Profile</div>
+                                    </div>
+                                </a>
+
+                                <div className="bg-[#1e293b] p-4 rounded-xl flex items-center gap-4 hover:bg-[#2d3b4e] transition-colors cursor-default relative z-50">
+                                    <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-[#111827]">
+                                        <Icons.MapPin className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <div className="text-xs text-gray-400 uppercase">Location</div>
+                                        <div className="font-medium">Nautanwa, Uttar Pradesh, India</div>
+                                    </div>
+                                </div>
+
+                                <div className="bg-[#1e293b] p-4 rounded-xl flex items-center gap-4 hover:bg-[#2d3b4e] transition-colors cursor-default relative z-50">
+                                    <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-[#111827]">
+                                        <Icons.Calendar className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                        <div className="text-xs text-gray-400 uppercase">Date of Birth</div>
+                                        <div className="font-medium">04 March 2002</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="mt-6 flex gap-3">
+                                <span className="px-3 py-1 border border-gray-600 rounded text-xs text-gray-400">Hindi (Native)</span>
+                                <span className="px-3 py-1 border border-gray-600 rounded text-xs text-gray-400">English</span>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label style="display:block; margin-bottom:8px; font-weight:600;">Your Email</label>
-                            <input type="email" name="email" class="form-input" required>
+
+                        <div className="bg-white rounded-2xl p-8 text-[#111827]">
+                            <h3 className="text-2xl font-bold serif-font mb-6">Send Message</h3>
+                            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                                <input type="text" placeholder="Your Name" className="w-full bg-[#F8FAFC] border border-gray-200 p-3 rounded-lg focus:outline-none focus:border-[#EAB308]" />
+                                <input type="email" placeholder="Your Email" className="w-full bg-[#F8FAFC] border border-gray-200 p-3 rounded-lg focus:outline-none focus:border-[#EAB308]" />
+                                <textarea rows="4" placeholder="Message..." className="w-full bg-[#F8FAFC] border border-gray-200 p-3 rounded-lg focus:outline-none focus:border-[#EAB308]"></textarea>
+                                <button className="w-full bg-[#1e293b] text-white font-bold py-4 rounded-lg hover:bg-[#111827] transition-colors shadow-lg glow-active">
+                                    Send Message
+                                </button>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label style="display:block; margin-bottom:8px; font-weight:600;">Message</label>
-                            <textarea name="message" class="form-input" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
-                    </form>
+                    </div>
+
+                    <div className="mt-20 border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+                        <p>© 2026 Surendra Yadav. All rights reserved.</p>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
+        );
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Surendra Yadav. Made with <i class="fas fa-heart" style="color:var(--primary);"></i></p>
-        </div>
-    </footer>
+        // --- Education & Certifications Section ---
+        const EducationAndCerts = () => {
+            return (
+                <section id="education" className="py-20 bg-white border-t border-gray-100">
+                     <div className="container mx-auto px-6">
+                        <div className="text-center mb-16">
+                            <span className="text-[#EAB308] font-bold text-sm uppercase tracking-wider block mb-2">Academic Background</span>
+                            <h2 className="text-3xl md:text-4xl font-bold serif-font text-[#111827]">Education & Certifications</h2>
+                        </div>
 
-    <!-- Image Modal (For Certificates) -->
-    <div id="imageModal" class="modal">
-        <span class="close-modal">&times;</span>
-        <img id="modalImg" class="modal-content">
-    </div>
+                        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                            
+                            {/* Education Column */}
+                            <div>
+                                <div className="flex items-center gap-3 mb-8">
+                                    <div className="w-10 h-10 rounded bg-[#1e293b] flex items-center justify-center text-white shadow-lg">
+                                        <Icons.GraduationCap className="w-5 h-5" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold serif-font text-[#111827]">Education</h3>
+                                </div>
 
-    <!-- Project Modal (New) -->
-    <div id="projectModal" class="modal">
-        <div class="modal-content project-modal-box">
-            <span class="close-project-modal">&times;</span>
-            <img id="project-img-display" class="project-modal-img" src="" alt="Project Image">
-            <h3 id="project-title-display" style="font-size: 1.8rem; margin-bottom: 15px; color: var(--primary);"></h3>
-            <p id="project-desc-display" style="color: var(--text-muted); line-height: 1.6;"></p>
-        </div>
-    </div>
+                                <div className="space-y-6">
+                                    {[
+                                        { deg: "Bachelor of Commerce", inst: "Siddharth University, Uttar Pradesh", year: "Graduated: 2023", score: "52%" },
+                                        { deg: "Intermediate (12th)", inst: "Nautanwa Inter College, Uttar Pradesh", year: "Completed: 2020", score: "62%" },
+                                        { deg: "High School (10th)", inst: "Madhuban Inter College, Uttar Pradesh", year: "Completed: 2018", score: "78.5%" }
+                                    ].map((edu, i) => (
+                                        <motion.div 
+                                            key={i}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: i * 0.1 }}
+                                            className="bg-[#F8FAFC] p-6 rounded-xl border border-gray-100 transition-colors hover:border-[#EAB308]"
+                                        >
+                                            <h4 className="font-bold text-[#111827] text-lg mb-1">{edu.deg}</h4>
+                                            <div className="text-[#EAB308] text-sm font-medium mb-3">{edu.inst}</div>
+                                            <div className="flex items-center gap-3 text-xs text-gray-500">
+                                                <div className="flex items-center gap-1"><Icons.Calendar className="w-3 h-3" /> {edu.year}</div>
+                                                <span className="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded font-bold">{edu.score}</span>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </div>
 
-    <!-- JAVASCRIPT -->
-    <script>
-        // 1. Theme Toggle
-        const themeBtn = document.getElementById('theme-toggle');
-        const body = document.body;
-        const icon = themeBtn.querySelector('i');
-        
-        if(localStorage.getItem('theme') === 'dark') {
-            body.setAttribute('data-theme', 'dark');
-            icon.classList.replace('fa-moon', 'fa-sun');
-        }
+                            {/* Certifications Column */}
+                            <div>
+                                <div className="flex items-center gap-3 mb-8">
+                                    <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-white shadow-lg">
+                                        <Icons.Award className="w-5 h-5" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold serif-font text-[#111827]">Certifications</h3>
+                                </div>
 
-        themeBtn.addEventListener('click', () => {
-            if(body.getAttribute('data-theme') === 'light'){
-                body.setAttribute('data-theme', 'dark');
-                icon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                body.setAttribute('data-theme', 'light');
-                icon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
-        });
+                                <div className="space-y-4">
+                                    {[
+                                        { title: "CCC (Course on Computer Concepts)", org: "NIELIT • 2021" },
+                                        { title: "Tally Prime (Accounting Software)", org: "CIT Nautanwa • 2023" },
+                                        { title: "Microsoft Power BI", org: "Data Visualization & Dashboards" },
+                                        { title: "Warehouse Management", org: "Udemy - Logistics & Supply Chain" },
+                                        { title: "Inventory Management", org: "Stock Control & Operations" }
+                                    ].map((cert, i) => (
+                                        <motion.div 
+                                            key={i}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: i * 0.1 }}
+                                            whileHover={{ scale: 1.02 }}
+                                            className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center gap-4 hover:shadow-md transition-all"
+                                        >
+                                            <div className="w-1.5 h-1.5 bg-[#EAB308] rounded-full flex-shrink-0"></div>
+                                            <div>
+                                                <h4 className="font-bold text-[#111827] text-sm">{cert.title}</h4>
+                                                <p className="text-xs text-gray-500 mt-0.5">{cert.org}</p>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
 
-        // 2. Navbar & Links
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if(window.scrollY > 50) navbar.classList.add('scrolled');
-            else navbar.classList.remove('scrolled');
-        });
-
-        // 3. Typewriter Effect
-        const typeText = document.getElementById('typewriter');
-        const words = ["Accounting", "Data Analysis", "Supply Chain", "Finance"];
-        let wIndex = 0;
-        let cIndex = 0;
-        let isDeleting = false;
-
-        function type() {
-            const current = words[wIndex];
-            if(isDeleting) {
-                typeText.textContent = current.substring(0, cIndex - 1);
-                cIndex--;
-            } else {
-                typeText.textContent = current.substring(0, cIndex + 1);
-                cIndex++;
-            }
-
-            if(!isDeleting && cIndex === current.length) {
-                isDeleting = true;
-                setTimeout(type, 2000);
-            } else if(isDeleting && cIndex === 0) {
-                isDeleting = false;
-                wIndex = (wIndex + 1) % words.length;
-                setTimeout(type, 500);
-            } else {
-                setTimeout(type, isDeleting ? 100 : 150);
-            }
-        }
-        type();
-
-        // 4. Scroll Reveal
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) entry.target.classList.add('active');
-            });
-        });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        // 5. 3D Card Tilt (Desktop only)
-        const tiltCard = document.getElementById('tilt-card');
-        if(window.innerWidth > 992) {
-            document.addEventListener('mousemove', (e) => {
-                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-                tiltCard.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-            });
-        }
-
-        // 6. Mobile Menu
-        const ham = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
-        ham.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            ham.querySelector('i').classList.toggle('fa-bars');
-            ham.querySelector('i').classList.toggle('fa-times');
-        });
-
-        // 7. Image Modal (Certificates)
-        const imageModal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImg');
-        const closeImageModal = document.querySelector('.close-modal');
-
-        function openModal(el) {
-            imageModal.style.display = "flex";
-            modalImg.src = el.querySelector('img').src;
-            setTimeout(() => imageModal.classList.add('open'), 10);
-        }
-        
-        closeImageModal.onclick = () => {
-            imageModal.classList.remove('open');
-            setTimeout(() => imageModal.style.display = "none", 300);
-        };
-        
-        // 8. Project Modal (New)
-        const projectModal = document.getElementById('projectModal');
-        const projectTitleDisplay = document.getElementById('project-title-display');
-        const projectDescDisplay = document.getElementById('project-desc-display');
-        const projectImgDisplay = document.getElementById('project-img-display');
-        const closeProjectModal = document.querySelector('.close-project-modal');
-
-        // Add event listeners to project cards
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const title = card.getAttribute('data-title');
-                const desc = card.getAttribute('data-desc');
-                const img = card.getAttribute('data-img');
-
-                projectTitleDisplay.textContent = title;
-                projectDescDisplay.textContent = desc;
-                projectImgDisplay.src = img;
-
-                projectModal.style.display = "flex";
-                setTimeout(() => projectModal.classList.add('open'), 10);
-            });
-        });
-
-        closeProjectModal.onclick = () => {
-            projectModal.classList.remove('open');
-            setTimeout(() => projectModal.style.display = "none", 300);
+                                <div className="mt-12">
+                                     <div className="flex items-center gap-3 mb-6">
+                                        <div className="w-10 h-10 rounded bg-[#1e293b] flex items-center justify-center text-white shadow-lg">
+                                            <Icons.Target className="w-5 h-5" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold serif-font text-[#111827]">Key Achievements</h3>
+                                    </div>
+                                    <ul className="space-y-3 pl-2">
+                                        {[
+                                            "Received Highest Loan Distribution Award at Zone Level at Prayas Financial Services Pvt. Ltd.",
+                                            "Achieved Highest Loan Distribution Award twice at Credit Access Grameen Ltd.",
+                                            "Successfully managed customer databases and MIS reporting systems improving operational efficiency.",
+                                            "Maintained 100% accuracy in data entry and financial documentation across all roles."
+                                        ].map((ach, i) => (
+                                            <li key={i} className="flex gap-3 text-sm text-gray-600">
+                                                <span className="text-green-500 mt-1">✓</span> {ach}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
         };
 
-        // Close Modals on Outside Click
-        window.onclick = (e) => {
-            if(e.target == imageModal) closeImageModal.onclick();
-            if(e.target == projectModal) closeProjectModal.onclick();
+        const App = () => {
+            return (
+                <div className="antialiased">
+                    <Navbar />
+                    <Hero />
+                    <About />
+                    <Experience />
+                    <Skills />
+                    <EducationAndCerts />
+                    <Contact />
+                </div>
+            );
         };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
     </script>
 </body>
 </html>
