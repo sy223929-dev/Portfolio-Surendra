@@ -68,7 +68,7 @@
         /* FORCE LINK CLICKABILITY */
         .force-click {
             position: relative;
-            z-index: 9999 !important;
+            z-index: 10 !important;
             cursor: pointer !important;
             pointer-events: auto !important;
         }
@@ -82,6 +82,7 @@
         const { useState, useEffect, useRef } = React;
         
         // --- SAFE ANIMATION LOADER ---
+        // Framer Motion via CDN attaches to window.Motion
         const MotionLib = window.Motion;
         const motion = MotionLib ? MotionLib.motion : { 
             div: ({children, className, ...props}) => <div className={className} {...props}>{children}</div>,
@@ -90,7 +91,6 @@
             span: ({children, className, ...props}) => <span className={className} {...props}>{children}</span>,
             li: ({children, className, ...props}) => <li className={className} {...props}>{children}</li>
         };
-        const AnimatePresence = MotionLib ? MotionLib.AnimatePresence : ({children}) => <>{children}</>;
 
         // --- Brand Icons ---
         const BrandIcons = {
@@ -191,10 +191,10 @@
 
             const phrases = [
                 "Finance & MIS Professional",
+                "Warehouse Management",
                 "Accounting & Tally Prime",
                 "Supply Chain Specialist",
-                "Excel | SQL | Power BI",
-                "Data Analysis Expert"
+                "Excel | Power BI | Web Dev"
             ];
 
             useEffect(() => {
@@ -238,14 +238,13 @@
                 
                 <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
                     
-                    {/* Interactive Profile Image Animation - RECTANGLE & MORE ANIMATION */}
+                    {/* Profile Animation */}
                     <motion.div 
                         initial={{ scale: 0, opacity: 0, y: 50 }} 
                         animate={{ scale: 1, opacity: 1, y: 0 }} 
                         transition={{ duration: 0.8, ease: "easeOut" }}
                         className="relative mb-10 z-20"
                     >
-                        {/* Floating Wrapper */}
                         <motion.div
                             animate={{ y: [0, -15, 0] }}
                             transition={{ 
@@ -273,14 +272,11 @@
                                         onError={(e) => {
                                             e.target.onerror = null; 
                                             e.target.style.display='none';
-                                            e.target.parentNode.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gray-800"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500 w-24 h-24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
+                                            e.target.parentNode.innerHTML = '<div class="w-full h-full flex flex-col items-center justify-center bg-gray-800 text-gray-400"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 mb-2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="text-xs uppercase tracking-widest font-bold">Photo</span></div>';
                                         }}
                                     />
-                                    {/* Shine Overlay */}
                                     <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 </div>
-                                
-                                {/* Decorative Elements */}
                                 <div className="absolute -top-4 -right-4 w-12 h-12 bg-[#EAB308] rounded-full blur-xl opacity-50 animate-pulse"></div>
                                 <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-blue-500 rounded-full blur-xl opacity-50 animate-pulse delay-700"></div>
                             </motion.div>
@@ -294,10 +290,7 @@
                     >
                         <h3 className="text-[#EAB308] font-medium text-sm mb-2">Welcome to my portfolio</h3>
                         <h1 className="text-4xl md:text-6xl font-bold serif-font mb-3">Surendra Yadav</h1>
-                        
-                        {/* Typewriter Component */}
                         <Typewriter />
-
                     </motion.div>
 
                     <div className="flex flex-col md:flex-row gap-6 text-sm text-gray-400 mb-10 items-center">
@@ -305,14 +298,13 @@
                             <Icons.MapPin className="w-4 h-4 text-yellow-500" /> Nautanwa, Uttar Pradesh, India
                         </div>
                         <div className="flex flex-wrap justify-center gap-6">
-                            {/* FORCE CLICK LINKEDIN BUTTON */}
                             <a 
                                 href="https://www.linkedin.com/in/surendra-yadav-a78916214" 
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 hover:text-white transition-colors glow-hover force-click p-2"
                             >
-                                <Icons.Linkedin className="w-4 h-4 text-yellow-500" /> LinkedIn Profile
+                                <Icons.Linkedin className="w-4 h-4 text-yellow-500" /> LinkedIn
                             </a>
                             <a href="mailto:sy223929@gmail.com" className="flex items-center gap-2 hover:text-white transition-colors glow-hover force-click p-2">
                                 <Icons.Mail className="w-4 h-4 text-yellow-500" /> sy223929@gmail.com
@@ -334,10 +326,10 @@
 
         const About = () => {
             const stats = [
-                { icon: Icons.TrendingUp, title: "3+ Years", sub: "Professional Experience" },
-                { icon: Icons.Award, title: "Multiple Awards", sub: "Highest Loan Distribution" },
-                { icon: Icons.Target, title: "100% Accuracy", sub: "In Financial Documentation" },
-                { icon: Icons.Users, title: "Team Player", sub: "Cross-functional Coordination" }
+                { icon: Icons.TrendingUp, title: "4+ Years", sub: "Professional Experience" },
+                { icon: Icons.Award, title: "Awards", sub: "Highest Distribution" },
+                { icon: Icons.Target, title: "Accuracy", sub: "In Documentation" },
+                { icon: Icons.Users, title: "Collaborative", sub: "Team Excellence" }
             ];
 
             return (
@@ -347,11 +339,11 @@
                             <span className="text-[#EAB308] font-bold text-sm uppercase tracking-wider block mb-2">About Me</span>
                             <h2 className="text-3xl md:text-4xl font-bold serif-font text-[#111827]">Professional Summary</h2>
                             <p className="max-w-3xl mx-auto mt-6 text-gray-600 leading-relaxed font-light">
-                                Results-driven office professional with 3+ years of experience in finance operations, office administration, MIS reporting, and customer data management. Skilled in Advanced Excel, Tally Prime, Python, Power BI, MySQL, MS Word and PowerPoint with working knowledge of supply chain operations, documentation flow, and record management. Proven track record of achieving performance targets with multiple Highest Loan Distribution Awards. Seeking office-based role in MIS, Back Office, Accounting, or Supply Chain Operations.
+                                Results-driven office professional with 4+ years of experience in finance operations, warehouse management, office administration, MIS reporting, and customer data management. Skilled in Advanced Excel, Tally Prime, Python, Power BI, MySQL, Web Development, Web Design, MS Word and PowerPoint with strong working knowledge of supply chain operations, inventory control, warehouse operations, documentation flow, and record management. Proven track record of achieving performance targets with multiple Highest Loan Distribution Awards and warehouse efficiency improvements. Seeking office-based role in MIS, Back Office, Accounting, Supply Chain Operations, or Warehouse Management.
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                             {stats.map((stat, idx) => (
                                 <motion.div 
                                     key={idx}
@@ -362,10 +354,10 @@
                                     className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all glow-hover"
                                 >
                                     <div className="bg-[#111827] p-3 rounded-lg text-white mb-4 w-fit">
-                                        <stat.icon className="w-6 h-6" />
+                                        <stat.icon className="w-5 h-5" />
                                     </div>
-                                    <h3 className="text-xl font-bold text-[#111827] serif-font mb-1">{stat.title}</h3>
-                                    <p className="text-sm text-gray-500">{stat.sub}</p>
+                                    <h3 className="text-lg font-bold text-[#111827] serif-font mb-1">{stat.title}</h3>
+                                    <p className="text-xs text-gray-500">{stat.sub}</p>
                                 </motion.div>
                             ))}
                         </div>
@@ -380,7 +372,7 @@
                     role: "Branch Relationship Manager",
                     company: "Prayas Financial Services Pvt. Ltd.",
                     badge: "Zone Level Award",
-                    date: "December 2023 - January 2025",
+                    date: "Dec 2023 - Jan 2025",
                     loc: "Gorakhpur, UP",
                     points: [
                         "Maintained comprehensive customer records, documentation, and daily MIS reports using Advanced Excel with pivot tables and VLOOKUP functions.",
@@ -395,13 +387,15 @@
                     role: "Relationship Manager",
                     company: "Credit Access Grameen Limited",
                     badge: "Two-time Area Award",
-                    date: "July 2022 - December 2023",
+                    date: "July 2022 - Dec 2023",
                     loc: "Kaptanganj, UP",
                     points: [
                         "Managed branch-level records, customer databases, and generated daily and weekly MIS reports for operational monitoring.",
                         "Handled complete documentation flow including verification, filing, and office administration activities.",
                         "Maintained basic accounts records and created detailed reporting sheets for financial tracking and compliance.",
+                        "Coordinated with branch office for timely data submission and preparation of operational reports.",
                         "Achieved Highest Loan Distribution Award twice in the operational area by streamlining data management processes.",
+                        "Ensured accuracy in customer data entry and maintained organized filing systems for quick retrieval.",
                         "Successfully processed loan collections and maintained systematic record of all banking transactions."
                     ]
                 },
@@ -415,6 +409,20 @@
                         "Assisted in insurance policy processing, documentation, and customer service activities.",
                         "Maintained policy records and prepared reports on sales performance and renewals.",
                         "Handled customer queries and provided support for policy-related documentation and data entry."
+                    ]
+                },
+                {
+                    role: "Hub Manager (Last Mile Delivery)",
+                    company: "Flipkart",
+                    badge: null,
+                    date: "2020 - 2021",
+                    loc: "Nautanwa, UP",
+                    points: [
+                        "Managed daily inbound shipments and outbound dispatch, ensuring accurate stock reconciliation at the delivery hub.",
+                        "Maintained daily delivery metrics, Return to Origin (RTO) data, and live stock tracking using MS Excel.",
+                        "Allocated shipments to delivery associates and analyzed daily dispatch data to improve overall delivery efficiency.",
+                        "Resolved missing inventory issues through systematic tracking and coordination with logistics teams.",
+                        "Implemented process improvements reducing RTO rates and enhancing last mile delivery performance."
                     ]
                 }
             ];
@@ -446,7 +454,7 @@
                                                 <Icons.Award className="w-3 h-3" /> {job.badge}
                                             </span>
                                         )}
-                                        <div className="flex gap-4 text-xs text-gray-500 mb-4 uppercase tracking-wide">
+                                        <div className="flex gap-4 text-[10px] text-gray-500 mb-4 uppercase tracking-wide">
                                             <span>{job.date}</span> • <span>{job.loc}</span>
                                         </div>
                                         <ul className="space-y-2">
@@ -497,9 +505,9 @@
 
                     <div className="grid md:grid-cols-3 gap-8 mb-16">
                         {[
-                            { icon: Icons.Monitor, title: "Computer & Data Management", list: ["Advanced Excel (Pivot, VLOOKUP, Power Query)", "Tally Prime (Accounting, Billing, GST)", "Python (Data Handling, Basic Analysis)", "Power BI (Dashboards, Reports)", "MySQL (Basic Queries)", "MS Word, MS PowerPoint"] },
-                            { icon: Icons.FileText, title: "Office & Finance Operations", list: ["MIS Reporting", "Data Management", "Back Office Operations", "Billing & Record Keeping", "Documentation & File Management", "Office Coordination", "Payroll Data Support"] },
-                            { icon: Icons.Box, title: "Supply Chain Knowledge", list: ["Purchase and Sales Record Flow", "Stock Management & Inventory Control", "Warehouse Operations", "Operational Records Maintenance", "Cross-functional Coordination", "Excel-based Reporting Systems"] }
+                            { icon: Icons.Monitor, title: "Computer & Data Management", list: ["Advanced Excel (MIS Reports, Pivot Tables, VLOOKUP, XLOOKUP, Power Query, Dashboards)", "Tally Prime (Accounting Entries, Billing, GST)", "Python (Data Handling, Basic Analysis)", "Power BI (Dashboards, Reports)", "MySQL (Basic Queries)", "MS Word", "MS PowerPoint", "Web Development", "Web Design"] },
+                            { icon: Icons.FileText, title: "Office & Finance Operations", list: ["MIS Reporting", "Data Management", "Back Office Operations", "Billing", "Record Keeping", "Documentation", "File Management", "Office Coordination", "Basic Accounting Support", "Payroll Data Support"] },
+                            { icon: Icons.Box, title: "Supply Chain Knowledge", list: ["Purchase and Sales Record Flow", "Stock Management", "Inventory Control", "Data Entry and Tracking", "Operational Records Maintenance", "Cross-functional Coordination", "Warehouse Operations", "Movement Documentation", "Excel-based Reporting Systems"] }
                         ].map((card, idx) => (
                             <motion.div 
                                 key={idx}
@@ -539,8 +547,122 @@
             </section>
         );
 
+        const EducationAndCerts = () => (
+            <section id="education" className="py-20 bg-white border-t border-gray-100">
+                 <div className="container mx-auto px-6">
+                    <div className="text-center mb-16">
+                        <span className="text-[#EAB308] font-bold text-sm uppercase tracking-wider block mb-2">Academic Background</span>
+                        <h2 className="text-3xl md:text-4xl font-bold serif-font text-[#111827]">Education & Certifications</h2>
+                    </div>
+
+                    <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                        <div>
+                            <div className="flex items-center gap-3 mb-8">
+                                <div className="w-10 h-10 rounded bg-[#1e293b] flex items-center justify-center text-white shadow-lg">
+                                    <Icons.GraduationCap className="w-5 h-5" />
+                                </div>
+                                <h3 className="text-2xl font-bold serif-font text-[#111827]">Education</h3>
+                            </div>
+                            <div className="space-y-6">
+                                {[
+                                    { deg: "Bachelor of Commerce", inst: "Siddharth University, UP", year: "2023", score: "52%" },
+                                    { deg: "Intermediate (12th)", inst: "Nautanwa Inter College, UP", year: "2020", score: "62%" },
+                                    { deg: "High School (10th)", inst: "Madhuban Inter College, UP", year: "2018", score: "78.5%" }
+                                ].map((edu, i) => (
+                                    <motion.div 
+                                        key={i} 
+                                        initial={{ opacity: 0, scale: 0.9, x: -20 }}
+                                        whileInView={{ opacity: 1, scale: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.15, duration: 0.4, ease: "easeOut" }}
+                                        whileHover={{ scale: 1.03, y: -3 }}
+                                        className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-yellow-400 cursor-default transition-all relative overflow-hidden group"
+                                    >
+                                        <div className="absolute -left-6 -top-6 w-24 h-24 bg-yellow-50 rounded-full blur-2xl group-hover:bg-yellow-200 transition-colors duration-500"></div>
+                                        <div className="absolute top-0 left-0 w-1.5 h-full bg-gray-100 group-hover:bg-[#EAB308] transition-colors duration-300"></div>
+                                        <div className="relative z-10 pl-3">
+                                            <h4 className="font-bold text-[#111827] text-lg mb-1">{edu.deg}</h4>
+                                            <div className="text-[#EAB308] text-sm font-medium mb-3">{edu.inst}</div>
+                                            <div className="flex items-center gap-4 text-xs text-gray-500">
+                                                <div className="flex items-center gap-1"><Icons.Calendar className="w-3 h-3" /> {edu.year}</div>
+                                                <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-bold shadow-sm">{edu.score}</span>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div>
+                            <div className="flex items-center gap-3 mb-8">
+                                <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-white shadow-lg">
+                                    <Icons.Award className="w-5 h-5" />
+                                </div>
+                                <h3 className="text-2xl font-bold serif-font text-[#111827]">Certifications</h3>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {[
+                                    { title: "O Level Certificate", desc: "Information Technology (NIELIT)" },
+                                    { title: "CCC Certificate", desc: "Course on Computer Concepts (NIELIT)" },
+                                    { title: "CCE Certificate ", desc: "Certificate Course in Entrepreneurship (ISB 2022)" },
+                                    { title: "Tally Prime", desc: "Accounting Software (CIT Nautanwa 2023)" },
+                                    { title: "Microsoft Power BI", desc: "Data Visualization & Dashboards" },
+                                    { title: "Warehouse Management", desc: "Logistics & Supply Chain Management (Udemy)" },
+                                    { title: "Inventory Management", desc: "Stock Control & Operations" }
+                                ].map((cert, i) => (
+                                    <motion.div 
+                                        key={i} 
+                                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.1, duration: 0.4, ease: "easeOut" }}
+                                        whileHover={{ scale: 1.05, y: -5 }}
+                                        className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-yellow-400 cursor-default transition-colors relative overflow-hidden group"
+                                    >
+                                        <div className="absolute -right-4 -top-4 w-12 h-12 bg-yellow-50 rounded-full blur-xl group-hover:bg-yellow-200 transition-colors duration-500"></div>
+                                        <div className="relative z-10">
+                                            <div className="w-1.5 h-1.5 bg-[#EAB308] rounded-full flex-shrink-0 mb-3 shadow-[0_0_8px_rgba(234,179,8,0.8)]"></div>
+                                            <h4 className="font-bold text-[#111827] text-sm">{cert.title}</h4>
+                                            <p className="text-xs text-gray-500 mt-1">{cert.desc}</p>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                            <div className="mt-12 bg-[#111827] text-white p-6 rounded-2xl relative overflow-hidden group shadow-xl">
+                                <motion.div 
+                                    className="absolute -right-10 -top-10 w-40 h-40 bg-[#EAB308] rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"
+                                ></motion.div>
+                                <h3 className="text-xl font-bold serif-font mb-4 flex items-center gap-2 relative z-10">
+                                    <Icons.Target className="w-5 h-5 text-yellow-500" /> Key Achievements
+                                </h3>
+                                <ul className="space-y-3 relative z-10">
+                                    {[
+                                        "Received Highest Loan Distribution Award at Zone Level at Prayas Financial Services Pvt. Ltd.",
+                                        "Achieved Highest Loan Distribution Award twice at Credit Access Grameen Ltd. in operational area",
+                                        "Successfully managed customer databases and MIS reporting systems improving operational efficiency",
+                                        "Maintained 100% accuracy in data entry and financial documentation across all roles"
+                                    ].map((ach, i) => (
+                                        <motion.li 
+                                            key={i}
+                                            initial={{ opacity: 0, x: 20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: i * 0.15 + 0.3 }}
+                                            className="flex gap-3 text-sm text-gray-300"
+                                        >
+                                            <span className="text-yellow-500 font-bold mt-0.5">✓</span> {ach}
+                                        </motion.li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+
         const Contact = () => (
-            <section id="contact" className="bg-[#111827] text-white py-20">
+            <footer id="contact" className="bg-[#111827] text-white py-20">
                 <div className="container mx-auto px-6">
                     <div className="text-center mb-16">
                         <span className="text-[#EAB308] font-bold text-sm uppercase tracking-wider block mb-2">Get In Touch</span>
@@ -548,213 +670,67 @@
                     </div>
 
                     <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-                        <div>
+                        <div className="space-y-6">
                             <h3 className="text-2xl font-bold serif-font mb-4">Let's Connect</h3>
-                            <p className="text-gray-400 font-light mb-8">
-                                Open to opportunities in MIS, Back Office, Accounting, or Supply Chain Operations.
-                            </p>
-                            <div className="space-y-4 relative z-20">
-                                <a 
-                                    href="mailto:sy223929@gmail.com"
-                                    className="bg-[#1e293b] p-4 rounded-xl flex items-center gap-4 hover:bg-[#2d3b4e] transition-colors cursor-pointer block force-click"
-                                >
-                                    <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-[#111827]">
-                                        <Icons.Mail className="w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <div className="text-xs text-gray-400 uppercase">Email</div>
-                                        <div className="font-medium">sy223929@gmail.com</div>
-                                    </div>
-                                </a>
-
-                                {/* FORCE CLICK LINKEDIN BUTTON (BOTTOM) */}
-                                <a 
-                                    href="https://www.linkedin.com/in/surendra-yadav-a78916214"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="bg-[#1e293b] p-4 rounded-xl flex items-center gap-4 hover:bg-[#2d3b4e] transition-colors cursor-pointer block force-click"
-                                >
-                                    <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-[#111827]">
-                                        <Icons.Linkedin className="w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <div className="text-xs text-gray-400 uppercase">LinkedIn</div>
-                                        <div className="font-medium">LinkedIn Profile</div>
-                                    </div>
-                                </a>
-
-                                <div className="bg-[#1e293b] p-4 rounded-xl flex items-center gap-4 hover:bg-[#2d3b4e] transition-colors cursor-default relative z-50">
-                                    <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-[#111827]">
-                                        <Icons.MapPin className="w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <div className="text-xs text-gray-400 uppercase">Location</div>
-                                        <div className="font-medium">Nautanwa, Uttar Pradesh, India</div>
-                                    </div>
-                                </div>
-
-                                <div className="bg-[#1e293b] p-4 rounded-xl flex items-center gap-4 hover:bg-[#2d3b4e] transition-colors cursor-default relative z-50">
-                                    <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-[#111827]">
-                                        <Icons.Calendar className="w-5 h-5" />
-                                    </div>
-                                    <div>
-                                        <div className="text-xs text-gray-400 uppercase">Date of Birth</div>
-                                        <div className="font-medium">04 March 2002</div>
-                                    </div>
-                                </div>
+                            <a href="tel:+91857707XXXX" className="bg-[#1e293b] p-4 rounded-xl flex items-center gap-4 hover:bg-[#2d3b4e] transition-colors force-click">
+                                <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-[#111827]"><Icons.Phone className="w-5 h-5" /></div>
+                                <div><div className="text-xs text-gray-400 uppercase">Phone</div><div className="font-medium text-sm">+91 8577074763</div></div>
+                            </a>
+                            <a href="mailto:sy223929@gmail.com" className="bg-[#1e293b] p-4 rounded-xl flex items-center gap-4 hover:bg-[#2d3b4e] transition-colors force-click">
+                                <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-[#111827]"><Icons.Mail className="w-5 h-5" /></div>
+                                <div><div className="text-xs text-gray-400 uppercase">Email</div><div className="font-medium text-sm">sy223929@gmail.com</div></div>
+                            </a>
+                            <a href="https://www.linkedin.com/in/surendra-yadav-a78916214" target="_blank" className="bg-[#1e293b] p-4 rounded-xl flex items-center gap-4 hover:bg-[#2d3b4e] transition-colors force-click">
+                                <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-[#111827]"><Icons.Linkedin className="w-5 h-5" /></div>
+                                <div><div className="text-xs text-gray-400 uppercase">LinkedIn</div><div className="font-medium text-sm">Professional Profile</div></div>
+                            </a>
+                            <div className="bg-[#1e293b] p-4 rounded-xl flex items-center gap-4">
+                                <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-[#111827]"><Icons.MapPin className="w-5 h-5" /></div>
+                                <div><div className="text-xs text-gray-400 uppercase">Location</div><div className="font-medium text-sm">Nautanwa, Uttar Pradesh</div></div>
                             </div>
-                            <div className="mt-6 flex gap-3">
-                                <span className="px-3 py-1 border border-gray-600 rounded text-xs text-gray-400">Hindi (Native)</span>
-                                <span className="px-3 py-1 border border-gray-600 rounded text-xs text-gray-400">English</span>
+                            
+                            <div className="bg-[#1e293b] p-5 rounded-xl flex flex-col gap-3 mt-4">
+                                <div className="text-xs text-gray-400 uppercase mb-1 font-bold tracking-wider">Additional Information</div>
+                                <div className="flex gap-3 items-center"><Icons.Calendar className="w-4 h-4 text-yellow-500" /><div className="text-sm text-gray-200"><span className="text-gray-400">Date of Birth:</span> 04 March 2002</div></div>
+                                <div className="flex gap-3 items-center"><Icons.FileText className="w-4 h-4 text-yellow-500" /><div className="text-sm text-gray-200"><span className="text-gray-400">Languages:</span> Hindi (Native), English</div></div>
+                                <div className="flex gap-3 items-center"><Icons.User className="w-4 h-4 text-yellow-500" /><div className="text-sm text-gray-200"><span className="text-gray-400">Nationality:</span> Indian</div></div>
                             </div>
                         </div>
 
                         <div className="bg-white rounded-2xl p-8 text-[#111827]">
                             <h3 className="text-2xl font-bold serif-font mb-6">Send Message</h3>
-                            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                            <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); console.log('Form logic would go here.'); }}>
                                 <input type="text" placeholder="Your Name" className="w-full bg-[#F8FAFC] border border-gray-200 p-3 rounded-lg focus:outline-none focus:border-[#EAB308]" />
                                 <input type="email" placeholder="Your Email" className="w-full bg-[#F8FAFC] border border-gray-200 p-3 rounded-lg focus:outline-none focus:border-[#EAB308]" />
-                                <textarea rows="4" placeholder="Message..." className="w-full bg-[#F8FAFC] border border-gray-200 p-3 rounded-lg focus:outline-none focus:border-[#EAB308]"></textarea>
-                                <button className="w-full bg-[#1e293b] text-white font-bold py-4 rounded-lg hover:bg-[#111827] transition-colors shadow-lg glow-active">
+                                <textarea rows="3" placeholder="Message..." className="w-full bg-[#F8FAFC] border border-gray-200 p-3 rounded-lg focus:outline-none focus:border-[#EAB308]"></textarea>
+                                <button className="w-full bg-[#1e293b] text-white font-bold py-4 rounded-lg hover:bg-[#111827] transition-all shadow-lg">
                                     Send Message
                                 </button>
                             </form>
                         </div>
                     </div>
 
-                    <div className="mt-20 border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-                        <p>© 2026 Surendra Yadav. All rights reserved.</p>
+                    <div className="mt-20 border-t border-gray-800 pt-8 text-center text-gray-500 text-xs flex flex-col items-center gap-4">
+                        <p>© 2026 Surendra Yadav. Built with <Icons.Heart className="inline text-red-500 w-3 h-3" /> and Passion.</p>
                     </div>
                 </div>
-            </section>
+            </footer>
         );
 
-        // --- Education & Certifications Section ---
-        const EducationAndCerts = () => {
-            return (
-                <section id="education" className="py-20 bg-white border-t border-gray-100">
-                     <div className="container mx-auto px-6">
-                        <div className="text-center mb-16">
-                            <span className="text-[#EAB308] font-bold text-sm uppercase tracking-wider block mb-2">Academic Background</span>
-                            <h2 className="text-3xl md:text-4xl font-bold serif-font text-[#111827]">Education & Certifications</h2>
-                        </div>
-
-                        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-                            
-                            {/* Education Column */}
-                            <div>
-                                <div className="flex items-center gap-3 mb-8">
-                                    <div className="w-10 h-10 rounded bg-[#1e293b] flex items-center justify-center text-white shadow-lg">
-                                        <Icons.GraduationCap className="w-5 h-5" />
-                                    </div>
-                                    <h3 className="text-2xl font-bold serif-font text-[#111827]">Education</h3>
-                                </div>
-
-                                <div className="space-y-6">
-                                    {[
-                                        { deg: "Bachelor of Commerce", inst: "Siddharth University, Uttar Pradesh", year: "Graduated: 2023", score: "52%" },
-                                        { deg: "Intermediate (12th)", inst: "Nautanwa Inter College, Uttar Pradesh", year: "Completed: 2020", score: "62%" },
-                                        { deg: "High School (10th)", inst: "Madhuban Inter College, Uttar Pradesh", year: "Completed: 2018", score: "78.5%" }
-                                    ].map((edu, i) => (
-                                        <motion.div 
-                                            key={i}
-                                            initial={{ opacity: 0, x: -20 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ delay: i * 0.1 }}
-                                            className="bg-[#F8FAFC] p-6 rounded-xl border border-gray-100 transition-colors hover:border-[#EAB308]"
-                                        >
-                                            <h4 className="font-bold text-[#111827] text-lg mb-1">{edu.deg}</h4>
-                                            <div className="text-[#EAB308] text-sm font-medium mb-3">{edu.inst}</div>
-                                            <div className="flex items-center gap-3 text-xs text-gray-500">
-                                                <div className="flex items-center gap-1"><Icons.Calendar className="w-3 h-3" /> {edu.year}</div>
-                                                <span className="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded font-bold">{edu.score}</span>
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Certifications Column */}
-                            <div>
-                                <div className="flex items-center gap-3 mb-8">
-                                    <div className="w-10 h-10 rounded bg-[#EAB308] flex items-center justify-center text-white shadow-lg">
-                                        <Icons.Award className="w-5 h-5" />
-                                    </div>
-                                    <h3 className="text-2xl font-bold serif-font text-[#111827]">Certifications</h3>
-                                </div>
-
-                                <div className="space-y-4">
-                                    {[
-                                        { title: "CCC (Course on Computer Concepts)", org: "NIELIT • 2021" },
-                                        { title: "Tally Prime (Accounting Software)", org: "CIT Nautanwa • 2023" },
-                                        { title: "Microsoft Power BI", org: "Data Visualization & Dashboards" },
-                                        { title: "Warehouse Management", org: "Udemy - Logistics & Supply Chain" },
-                                        { title: "Inventory Management", org: "Stock Control & Operations" }
-                                    ].map((cert, i) => (
-                                        <motion.div 
-                                            key={i}
-                                            initial={{ opacity: 0, x: 20 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ delay: i * 0.1 }}
-                                            whileHover={{ scale: 1.02 }}
-                                            className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex items-center gap-4 hover:shadow-md transition-all"
-                                        >
-                                            <div className="w-1.5 h-1.5 bg-[#EAB308] rounded-full flex-shrink-0"></div>
-                                            <div>
-                                                <h4 className="font-bold text-[#111827] text-sm">{cert.title}</h4>
-                                                <p className="text-xs text-gray-500 mt-0.5">{cert.org}</p>
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-
-                                <div className="mt-12">
-                                     <div className="flex items-center gap-3 mb-6">
-                                        <div className="w-10 h-10 rounded bg-[#1e293b] flex items-center justify-center text-white shadow-lg">
-                                            <Icons.Target className="w-5 h-5" />
-                                        </div>
-                                        <h3 className="text-2xl font-bold serif-font text-[#111827]">Key Achievements</h3>
-                                    </div>
-                                    <ul className="space-y-3 pl-2">
-                                        {[
-                                            "Received Highest Loan Distribution Award at Zone Level at Prayas Financial Services Pvt. Ltd.",
-                                            "Achieved Highest Loan Distribution Award twice at Credit Access Grameen Ltd.",
-                                            "Successfully managed customer databases and MIS reporting systems improving operational efficiency.",
-                                            "Maintained 100% accuracy in data entry and financial documentation across all roles."
-                                        ].map((ach, i) => (
-                                            <li key={i} className="flex gap-3 text-sm text-gray-600">
-                                                <span className="text-green-500 mt-1">✓</span> {ach}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            );
-        };
-
-        const App = () => {
-            return (
-                <div className="antialiased">
-                    <Navbar />
-                    <Hero />
-                    <About />
-                    <Experience />
-                    <Skills />
-                    <EducationAndCerts />
-                    <Contact />
-                </div>
-            );
-        };
+        const App = () => (
+            <div className="antialiased">
+                <Navbar />
+                <Hero />
+                <About />
+                <Experience />
+                <Skills />
+                <EducationAndCerts />
+                <Contact />
+            </div>
+        );
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
 </body>
 </html>
-
-
